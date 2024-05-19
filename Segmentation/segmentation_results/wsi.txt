@@ -1,0 +1,3 @@
+"""
+in this text file, the path or the whole slide images you want to do the tissue region segmentation should be enserted.
+"""
