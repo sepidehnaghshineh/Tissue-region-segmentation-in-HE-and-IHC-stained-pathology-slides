@@ -9,7 +9,7 @@ import argparse
 from openslide import OpenSlide
 sys.path.append(os.getcwd())
 from tools.LeNet5_different_inputSizes import select_model
-from tools.PredictingTools import chooseModel, LoadData, TestToDataframe, SaveMask, heatmap
+from tools.PredictingTools import  LoadData, TestToDataframe, SaveMask, heatmap
 from tools.CroppingTools import read_slide_to_level, mask_slide_to_level, OTSU_slide_to_level
 from tools.AnalyzingTools import Create_Overlay, mask_to_xml
 from tools.ScoringTools import Jaccard_Index, Dice_Coefficient
@@ -20,8 +20,6 @@ parser = argparse.ArgumentParser(description='Predicting')
 parser.add_argument('--input_dir', type=str, default=r"./Segmentation/segmentation_results/wsi.txt", help='a txt file containing path of the WSIs such as .svs, .mirx, .tiff, .ndpi files')
 parser.add_argument('--out_dir', type=str, default=r"./Segmentation/segmentation_results", help='output directory')
 parser.add_argument('--data_source', default='source_name', help='the source that you have got the WSIs', dest='data_source')
-parser.add_argument('--Level_patch', default='L4_128', help='different levels from 4 to 6 and different patch sizes from 16 to 128', dest='Level_patch')
-parser.add_argument('--model_type', default='LeNet5', help='the used CNN model', dest='model_type')
 parser.add_argument('--voting', type=str, default=None, help='\"hard\", \"soft\" or None')
 parser.add_argument('--resolution', type=int, default=4, help='resolution of the prediction, 1 is the cropsize, 2 is half of the cropsize, 3 is quarter of the cropsize etc.')
 
@@ -30,8 +28,8 @@ parser.add_argument('--resolution', type=int, default=4, help='resolution of the
 
 FLAGS = parser.parse_args()
 
-mdl_basename = FLAGS.model_type # LeNet5
-level_size:str = FLAGS.Level_patch # "L4_128"
+mdl_basename = "LeNet5"
+level_size:str = "L4_128"
 data_source:str = FLAGS.data_source
 
 mask_out_dir = FLAGS.out_dir
@@ -77,7 +75,9 @@ with open(scores_dir, 'w') as fil:
 
 model_level, model_cropsize = level_size[1:].split("_")
 model_level, model_cropsize = int(model_level), int(model_cropsize)
-model_path, means, stds = chooseModel(data_source=data_source, model_type=mdl_basename, Level_patch=level_size)
+model_path = r"Segmentation\model\LeNet5Segmentation.pth"
+means = np.load(r"Segmentation\model\means.npy")
+stds = np.load(r"Segmentation\model\stds.npy")
 
 stride = int(model_cropsize//2**(pred_resolution-1))
 
@@ -97,8 +97,6 @@ with open(scores_dir, 'a') as scores_file:
             save_dir = os.path.join(mask_out_dir, slide_name)
             os.makedirs(save_dir, exist_ok=True)
             predicted_mask_path = os.path.join(save_dir,'mask.png')
-            heatmap_mask_path = os.path.join(save_dir,'heatmap.png')
-            heatmap_mask_legends_path = os.path.join(save_dir,'heatmap_leg.png')
             
             slide = OpenSlide(slide_path)
             try:
@@ -130,45 +128,15 @@ with open(scores_dir, 'a') as scores_file:
             pred_df = TestToDataframe(model, device, dataloader)
             pred_df.to_csv(os.path.join(save_dir,'preds.csv'), index=False)
             SaveMask(pred_df, img_height, img_width, model_cropsize, predicted_mask_path, voting=voting, class_weights=(0.75, 0.25))
-            heatmap(pred_df, img_height, img_width, model_cropsize, heatmap_mask_legends_path)
             inverted_mask_im = cv2.imread(predicted_mask_path, cv2.IMREAD_GRAYSCALE)
             mask_im = cv2.bitwise_not(inverted_mask_im)
-            
-            overlay_im = Create_Overlay(Image.fromarray(img), Image.fromarray(mask_im), fill=(100, 100, 250, 70))
-            overlay_im.save(os.path.join(save_dir,'overlay.png'))
-            
+
             mask_to_xml(mask_im, os.path.join(save_dir, slide_name + '.xml'), downscale_factor=downscale)
             end_time = time.time()
             time_taken = end_time - start_time
             print(f"Time taken for {slide_name}: {time_taken} seconds") 
             
-            truth_mask = mask_slide_to_level(xml_path, (img_height, img_width), xml_downscale)
-            OTSU_mask = OTSU_slide_to_level(slide, (img_height, img_width), wanted_rlenght=wanted_rlength)
-            inverted_OTSU_mask = cv2.bitwise_not(OTSU_mask)
-            # Save the inverted OTSU mask
-            cv2.imwrite(os.path.join(save_dir, 'inverted_OTSU_mask.png'), inverted_OTSU_mask)  # Save inverted OTSU mask here
-            inverted_truth_mask = cv2.bitwise_not(truth_mask)
-            cv2.imwrite(os.path.join(save_dir, 'truth_mask.png'), inverted_truth_mask)
-            # turn the image to grayscale if it is in rgb
-            truth_mask = np.array(truth_mask)
-            mask_im = np.array(mask_im)
             
-            OTSU_overlay = Create_Overlay(Image.fromarray(img), Image.fromarray(OTSU_mask), fill=(100, 220, 100, 140))
-            OTSU_overlay.save(os.path.join(save_dir,'OTSU_overlay.png'))
-            print(truth_mask.shape)
-            print(OTSU_mask.shape)
-        
-            
-            otsu_jaccard_score = Jaccard_Index(truth_mask, OTSU_mask)
-            otsu_dice_coef = Dice_Coefficient(OTSU_mask, truth_mask)
-            
-            print("mask_im.shape: ", mask_im.shape)
-            jaccard_score = Jaccard_Index(truth_mask, mask_im)
-            dice_coef = Dice_Coefficient(mask_im, truth_mask)
-            print("jaccard_score: ", jaccard_score)
-            print("dice_coef: ", dice_coef)
-            scores_file.write(slide_name + ',' + str(jaccard_score) + ',' + str(dice_coef) + '\n')
-            otsu_scores_file.write(slide_name + ',' + str(otsu_jaccard_score) + ',' + str(otsu_dice_coef) + '\n')
             slide.close()
             print("done with: " + slide_name)
             print("------------------------------------------------------")
