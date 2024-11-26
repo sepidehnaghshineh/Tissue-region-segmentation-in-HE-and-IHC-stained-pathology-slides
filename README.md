@@ -5,7 +5,32 @@ takes approximately 22 seconds to segment out a digital pathology slide.
 
 We have successfully tested our CNN models on seven public and private different cohorts in The Cancer Genome Atlas (TCGA), HER2 grading challenge, HEROHE challenge, CAMELYON 17 challenge, PANDA challenge, a local Singapore cohort, and a local Turkey cohort. For all cohorts, we use the same model architecture. 
 
-Here's a sample README file for your project that explains how to run the code step-by-step:
+Folder Structure
+
+The repository is organized as follows:
+
+├── Dataset_Prep/                  # Scripts and tools for preparing datasets
+├── Models_Train_Test/             # Training and testing scripts for CNN models
+│   ├── CNN_Train_Test/            # Subfolder for CNN-specific scripts
+├── Segmentation/                  # Scripts and tools for tissue segmentation
+├── Trained_Model_Analysis/        # Analysis and visualization of trained model results
+├── bash_scripts/                  # Bash scripts for automated tasks
+├── tools/                         # Additional utilities for the project
+├── README.md                      # Project documentation
+├── requirements.txt               # Python dependencies and requirements
+Folder Descriptions
+Dataset_Prep:
+Contains preprocessing scripts for preparing datasets, including data augmentation and normalization.
+Models_Train_Test:
+Contains training and testing scripts for building and evaluating CNN models.
+Segmentation:
+Includes inference scripts and tools to generate segmentation masks for WSIs.
+Trained_Model_Analysis:
+Provides tools to evaluate the performance of trained models, including metrics like Jaccard Index and Dice Coefficient.
+bash_scripts:
+Scripts for automating repetitive tasks such as running multiple experiments or generating reports.
+tools:
+Utility scripts and helper functions for various project tasks.
 
 ---
 
