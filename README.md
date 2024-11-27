@@ -1,14 +1,19 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14131968.svg)](https://doi.org/10.5281/zenodo.14131968)
+
 This repository is the official implementation of "TISSUE REGION SEGMENTATION IN H&E-STAINED AND IHC-STAINED PATHOLOGY SLIDES OF SPECIMENS FROM DIFFERENT ORIGINS".
 
 We have developed a deep learning-based CNN model segmenting tissue regions in whole slide of a sample from its H&E stained, and IHC stained digital histopathology slides from different origins. the used CNN model is light-weighted with 19.8 Mb FLOPs and is proper for low cost implimantations and it
 takes approximately 22 seconds to segment out a digital pathology slide.
 
-We have successfully tested our CNN models on seven public and private different cohorts in The Cancer Genome Atlas (TCGA), HER2 grading challenge, HEROHE challenge, CAMELYON 17 challenge, PANDA challenge, a local Singapore cohort, and a local Turkey cohort. For all cohorts, we use the same model architecture. 
+We have successfully tested our CNN models on seven public and private different cohorts in The Cancer Genome Atlas (TCGA), HER2 grading challenge, HEROHE challenge, CAMELYON 17 challenge, PANDA challenge, a local Singapore cohort, and a local Turkey cohort from Bahcesehir Medical School. For all cohorts, we use the same model architecture. 
 
-Folder Structure
+---
+
+## Folder Structure
 
 The repository is organized as follows:
 
+```
 ├── Dataset_Prep/                  # Scripts and tools for preparing datasets
 ├── Models_Train_Test/             # Training and testing scripts for CNN models
 │   ├── CNN_Train_Test/            # Subfolder for CNN-specific scripts
@@ -18,21 +23,30 @@ The repository is organized as follows:
 ├── tools/                         # Additional utilities for the project
 ├── README.md                      # Project documentation
 ├── requirements.txt               # Python dependencies and requirements
-Folder Descriptions
-Dataset_Prep:
-Contains preprocessing scripts for preparing datasets, including data augmentation and normalization.
-Models_Train_Test:
-Contains training and testing scripts for building and evaluating CNN models.
-Segmentation:
-Includes inference scripts and tools to generate segmentation masks for WSIs.
-Trained_Model_Analysis:
-Provides tools to evaluate the performance of trained models, including metrics like Jaccard Index and Dice Coefficient.
-bash_scripts:
-Scripts for automating repetitive tasks such as running multiple experiments or generating reports.
-tools:
-Utility scripts and helper functions for various project tasks.
+```
+
+### Folder Descriptions
+
+1. **Dataset_Prep**:  
+   Contains preprocessing scripts for preparing datasets, including data augmentation and normalization.
+
+2. **Models_Train_Test**:  
+   Contains training and testing scripts for building and evaluating CNN models.
+
+3. **Segmentation**:  
+   Includes inference scripts and tools to generate segmentation masks for WSIs.
+
+4. **Trained_Model_Analysis**:  
+   Provides tools to evaluate the performance of trained models, including metrics like Jaccard Index and Dice Coefficient.
+
+5. **bash_scripts**:  
+   Scripts for automating repetitive tasks such as running multiple experiments or generating reports.
+
+6. **tools**:  
+   Utility scripts and helper functions for various project tasks.
 
 ---
+We will explain the following steps one-by-one:
 
 # Tissue Segmentation Tool using LeNet5
 
@@ -41,7 +55,7 @@ This repository provides a tool for tissue segmentation in whole slide images (W
 ---
 
 ## Table of Contents
-
+1. [Turkey Cohort](#turkey_cohort)  
 1. [Features](#features)  
 2. [Installation](#installation)  
 3. [Usage](#usage)  
@@ -51,6 +65,13 @@ This repository provides a tool for tissue segmentation in whole slide images (W
 7. [Citations](#citations)
 
 ---
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14131968.svg)](https://doi.org/10.5281/zenodo.14131968)
+
+## Turkey Cohort
+Digitized haematoxylin and eosin (H&E)-stained whole-slide-images (WSIs) of 72 Breast tissues and Digitized Immunehistochemistery (IHC)-stained whole-slide-images (WSIs) of 163 Breast tissues which were collected from patients at Bahcesehir Medical School in Turkey. H&E-stained and IHC-stained slides were scanned at 40× magnification (specimen-level pixel size 0.25μm × 0.25μm).
+
+Slides were manually annotated and classified into two classes, tissue, and background, using the [the ASAP annotation tool](https://computationalpathologygroup.github.io/ASAP/).
+
 
 ## Features
 
@@ -144,5 +165,3 @@ If you use this code in your research, please cite the following sources:
 
 
 ---
-
-Feel free to customize the example commands, repository name, and file names according to your project setup. Let me know if you'd like further assistance!
