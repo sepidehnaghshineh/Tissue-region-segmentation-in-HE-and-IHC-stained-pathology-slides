@@ -72,6 +72,13 @@ Digitized haematoxylin and eosin (H&E)-stained whole-slide-images (WSIs) of 72 B
 
 Slides were manually annotated and classified into two classes, tissue, and background, using the [the ASAP annotation tool](https://computationalpathologygroup.github.io/ASAP/).
 
+Whole slide images for H&E-stained and IHC-Stained slides have been deposited at Zenodo under the https://zenodo.org/records/14131968 and are publicly available.
+
+<img src="Images/BAU_HE_Annotation.png.jpeg" alt="Alt text" height="400" />
+
+
+
+
 
 ## Features
 
