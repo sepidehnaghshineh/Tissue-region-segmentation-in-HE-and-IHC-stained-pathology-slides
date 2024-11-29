@@ -23,7 +23,6 @@ else:
 
 parser = argparse.ArgumentParser(description='Cropping and Saving')
 parser.add_argument('--input_dir', type=str, default=f"./Dataset_Prep/data_preparation_results/Tissue_Masks/{dsource}_masks/{dtype}_tissue_mask_info_{code_num}.txt", help='info.txt file path')
-parser.add_argument('--input_dir', type=str, default=f"./Dataset_Prep/data_preparation_results/Tissue_Masks/source_name_masks/test_tissue_mask_info.txt", help='info.txt file path')
 parser.add_argument('--out_dir', type=str, default=r"./Dataset_Prep/data_preparation_results/", help='output directory')
 parser.add_argument('--patch_level',nargs="+" ,type=int, default=[4], help='The level of the patches that will be cropped.')
 parser.add_argument('--patch_size',nargs="+" ,type=int, default=[128], help='The size of the patches for highest level.')
