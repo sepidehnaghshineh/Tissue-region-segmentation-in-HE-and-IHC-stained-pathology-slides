@@ -51,15 +51,9 @@ We will explain the following steps one-by-one:
 ## Table of Contents
 1. [Required Python Packages](#required-python-packages)
 2. [Turkey Cohort](#turkey_cohort)
-3. [Machine Learning Dataset](#machine-learning-dataset) 
-1. [Features](#features)  
-2. [Installation](#installation)  
-3. [Usage](#usage)  
-4. [Input Requirements](#input-requirements)  
-5. [Output](#output)  
-6. [Example Command](#example-command)  
-7. [Citations](#citations)
-
+3. [Machine Learning Dataset](#machine-learning-dataset)
+4. [Training the Model](#training-the-model)
+5. [Tissue Segmentation Tool using LeNet5 (Inference)](#tissue-segmentation-tool-using-leNet5-(Inference))
 ---
 
 ## Required Python Packages
@@ -126,7 +120,7 @@ output_dir/
         └── source_name_train_Data_stats.txt
 ```
 ---
-### **Step-by-Step Guide for Running the Cropping Script**
+#### **Step-by-Step Guide for Running the Cropping Script**
   
   In digital pathology, working with large whole-slide images (WSIs) is computationally expensive. Cropping smaller, manageable image patches at different magnification levels (resolution levels) allows efficient training and evaluation of deep learning models.
 This script is designed to crop patches from tissue regions based on previously generated tissue masks and save them at specified levels and sizes. 
@@ -153,7 +147,7 @@ the Directory should have a structure like this:
 
 ---
 
-### **Training the Model**
+## **Training the Model**
 This code trains and validates a **LeNet5** Convolutional Neural Network (CNN) model for tissue segmentation in pathology images. The dataset contains image patches from Whole Slide Images (WSIs), and this code prepares the data, trains the model, and evaluates it.
 
    The code assumes the following folder structure:
@@ -200,10 +194,12 @@ torch.save(model.state_dict(), './results/.../trained_models/model.pth')
 This repository provides a tool for tissue segmentation in whole slide images (WSIs) using a deep learning model based on LeNet5. The tool processes WSIs, generates segmentation masks, and evaluates results using metrics like Jaccard Index and Dice Coefficient.
 
 ---
-
-
-
-
+1. [Features](#features)   
+3. [Usage](#usage)  
+4. [Input Requirements](#input-requirements)  
+5. [Output](#output)  
+6. [Example Command](#example-command)  
+7. [Citations](#citations)
 
 ## Features
 
@@ -211,37 +207,6 @@ This repository provides a tool for tissue segmentation in whole slide images (W
 - Generates segmentation masks and evaluation scores.  
 - Supports "hard" and "soft" voting mechanisms for mask refinement.  
 - Saves results and intermediate outputs for review.
-
----
-
-## Installation
-
-### Prerequisites
-
-Ensure the following dependencies are installed:
-
-- Python >= 3.8  
-- PyTorch  
-- OpenCV (`cv2`)  
-- NumPy  
-- PIL (Pillow)  
-- OpenSlide-Python  
-- argparse  
-
-You can install dependencies with the following command:
-
-```bash
-pip install torch opencv-python-headless numpy pillow openslide-python argparse
-```
-
-### Cloning the Repository
-
-Clone the repository to your local system:
-
-```bash
-git clone https://github.com/<username>/<repository>.git
-cd <repository>
-```
 
 ---
 
