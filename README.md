@@ -72,9 +72,11 @@ To install requirements:
 pip install -r requirements.txt
 ```
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14131968.svg)](https://doi.org/10.5281/zenodo.14131968)
 
 ## Turkey Cohort
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14131968.svg)](https://doi.org/10.5281/zenodo.14131968)
+
 Digitized haematoxylin and eosin (H&E)-stained whole-slide-images (WSIs) of 72 Breast tissues and Digitized Immunehistochemistery (IHC)-stained whole-slide-images (WSIs) of 163 Breast tissues which were collected from patients at Bahcesehir Medical School in Turkey. H&E-stained and IHC-stained slides were scanned at 40× magnification (specimen-level pixel size 0.25μm × 0.25μm).
 
 Slides were manually annotated and classified into two classes, tissue, and background, using the [the ASAP annotation tool](https://computationalpathologygroup.github.io/ASAP/).
