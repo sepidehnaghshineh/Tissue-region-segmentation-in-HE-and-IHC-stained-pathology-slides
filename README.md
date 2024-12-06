@@ -45,7 +45,22 @@ The repository is organized as follows:
 6. **tools**:  
    Utility scripts and helper functions for various project tasks.
 
+We will explain the following steps one-by-one:
+
 ---
+
+## Required Python Packages
+
+All the experiments were run in a virtual environment created with pip on a Linux machine.
+
+To install requirements:
+
+```console
+pip install -r requirements.txt
+```
+### **Turkey Cohort(Bahcesehir Medical School):**
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14131968.svg)](https://doi.org/10.5281/zenodo.14131968)
+
 ### **Machine Learning Dataset:**
 
 In digital pathology, accurate tissue segmentation is essential for analyzing tissue samples in Whole Slide Images (WSIs). WSIs often contain non-tissue areas like background, glass, or other artifacts that need to be excluded for better computational analysis. This script:
