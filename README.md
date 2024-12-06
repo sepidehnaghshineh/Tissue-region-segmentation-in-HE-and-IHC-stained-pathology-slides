@@ -86,7 +86,7 @@ Whole slide images for H&E-stained and IHC-Stained slides have been deposited at
 <img src="Images/BAU_HE_Annotation.png.jpeg" alt="Alt text" height="400" />
 
 
-### **Machine Learning Dataset:**
+## **Machine Learning Dataset:**
 
 In digital pathology, accurate tissue segmentation is essential for analyzing tissue samples in Whole Slide Images (WSIs). WSIs often contain non-tissue areas like background, glass, or other artifacts that need to be excluded for better computational analysis. This script:
 
@@ -95,7 +95,7 @@ In digital pathology, accurate tissue segmentation is essential for analyzing ti
 3. **Produces RGB masks** that preserve the original slide colors within the tissue region for further visual inspection or downstream analysis.
 4. **Applies optional morphological operations** (erosion and dilation) to refine the masks, if specified by the user.
 
-## **Step-by-Step Guide to Run the Code for Generating Tissue Masks:**
+### **Step-by-Step Guide to Run the Code for Generating Tissue Masks:**
 - WSIs and their corresponding XML annotation files should be organized in the same directory.
 - Example structure:
   ```
