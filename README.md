@@ -126,7 +126,7 @@ output_dir/
         └── source_name_train_Data_stats.txt
 ```
 ---
-## **Explanation and Step-by-Step Guide for Running the Cropping Script**
+### **Step-by-Step Guide for Running the Cropping Script**
   
   In digital pathology, working with large whole-slide images (WSIs) is computationally expensive. Cropping smaller, manageable image patches at different magnification levels (resolution levels) allows efficient training and evaluation of deep learning models.
 This script is designed to crop patches from tissue regions based on previously generated tissue masks and save them at specified levels and sizes. 
