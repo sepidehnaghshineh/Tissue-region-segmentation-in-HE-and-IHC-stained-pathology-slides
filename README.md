@@ -46,6 +46,179 @@ The repository is organized as follows:
    Utility scripts and helper functions for various project tasks.
 
 ---
+### **Machine Learning Dataset:**
+
+In digital pathology, accurate tissue segmentation is essential for analyzing tissue samples in Whole Slide Images (WSIs). WSIs often contain non-tissue areas like background, glass, or other artifacts that need to be excluded for better computational analysis. This script:
+
+1. **Parses XML files** containing annotations (regions of interest like tissue, background, and ROI) associated with WSIs.
+2. **Generates binary tissue masks** that highlight tissue regions while excluding background and unwanted areas.
+3. **Produces RGB masks** that preserve the original slide colors within the tissue region for further visual inspection or downstream analysis.
+4. **Applies optional morphological operations** (erosion and dilation) to refine the masks, if specified by the user.
+
+## **Step-by-Step Guide to Run the Code for Generating Tissue Masks:**
+
+#### **1. Install Required Libraries**
+Ensure the following Python libraries are installed in your environment:
+```bash
+pip install lxml openslide-python pillow numpy opencv-python argparse
+```
+- **lxml**: For parsing XML files containing annotations.
+- **openslide-python**: For reading WSIs.
+- **PIL (Pillow)**: For image processing and saving.
+- **numpy**: For numerical operations.
+- **OpenCV**: For image manipulation.
+- **argparse**: For parsing command-line arguments.
+
+#### **2. Prepare the Input Directory**
+- Organize your WSIs and their corresponding XML annotation files in the same directory.
+- Example structure:
+  ```
+  input_dir/
+  ├── slide1.svs
+  ├── slide1.xml
+  ├── slide2.svs
+  └── slide2.xml
+  ```
+
+#### **3. Run the Script**
+Execute the script with the appropriate command-line arguments to specify:
+- **`--input_dir`**: The directory containing the input slides and XML files.
+- **`--output_dir`**: The directory where the output masks will be saved.
+- Optional: Specify the kernel size and iterations for erosion and dilation to refine the masks.
+  
+##### Example Command:
+```bash
+python tissue_mask_generator.py --input_dir "./WSI_Folder" --output_dir "./Dataset_Prep/results" --erosion_size 3 --erosion_iterations 2 --dilation_size 4 --dilation_iterations 2
+```
+#### **4. Output Directory Structure**
+The output will have a structured format:
+```
+output_dir/
+└── Tissue_Masks/
+    ├── source_name_masks/
+    │   ├── train_binary-mask/
+    │   ├── train_RGB-mask/
+    │   ├── train_eroded-mask/   # if erosion is applied
+    │   └── train_dilated-mask/  # if dilation is applied
+    └── Crops_info/
+        └── source_name_train_Data_stats.txt
+```
+
+#### **6. Example Use Case**
+Suppose you have the following setup:
+- Input WSI: `slide1.svs` with an associated `slide1.xml` file.
+- You run the script with a command like this:
+```bash
+python tissue_mask_generator.py --input_dir "./input_dir" --output_dir "./output_dir" --erosion_size 5 --erosion_iterations 1
+```
+The output in `./output_dir/Tissue_Masks/source_name_masks/train_binary-mask/` will contain the binary mask for `slide1.svs`, showing only the annotated tissue regions.
+
+---
+### **Explanation and Step-by-Step Guide for Running the Cropping Script**
+  
+  In digital pathology, working with large whole-slide images (WSIs) is computationally expensive. Cropping smaller, manageable image patches at different magnification levels (resolution levels) allows efficient training and evaluation of deep learning models.
+This script is designed to crop patches from tissue regions based on previously generated tissue masks and save them at specified levels and sizes. 
+
+
+
+## **Steps to Run the Script**
+
+1. **Prepare the Tissue Mask Files**:
+   - Ensure you have generated the tissue mask information (`info.txt`) files from the previous step.
+
+2. **Set Up the Directory Structure**:
+   ```
+   ./Dataset_Prep/data_preparation_results/Tissue_Masks/
+      └── source_name_masks/
+           ├── train_tissue_mask_info.txt
+           ├── test_tissue_mask_info.txt
+           └── val_tissue_mask_info.txt
+   ```
+
+3. **Run the Script**:
+   Open a terminal or command prompt and execute the script as follows:
+
+   ```bash
+   python crop_patches.py \
+     --input_dir "./Dataset_Prep/data_preparation_results/Tissue_Masks/source_name_masks/train_tissue_mask_info.txt" \
+     --out_dir "./Dataset_Prep/data_preparation_results/Cropped_Patches/" \
+     --patch_level 4 5 6 \
+     --patch_size 128 256 512
+   ```
+
+   - **Modify the parameters** as needed:
+     - `--input_dir`: Path to the tissue mask info file.
+     - `--out_dir`: Output directory for cropped patches.
+     - `--patch_level`: Levels to crop patches (e.g., 4, 5, 6).
+     - `--patch_size`: Size of patches at each level.
+
+4. **Output**:
+   The cropped patches will be saved in the output directory, organized by dataset type (`train`, `test`, `val`).
+
+---
+
+### **Training the Model**
+This code trains and validates a **LeNet5** Convolutional Neural Network (CNN) model for tissue segmentation in pathology images. The dataset contains image patches from Whole Slide Images (WSIs), and this code prepares the data, trains the model, and evaluates it.
+
+## Prerequisites
+
+Before running the code, ensure you have the following installed:
+- Install necessary libraries: `torch`, `numpy`, `pandas`, `matplotlib`, etc.
+     ```bash
+   pip install numpy pandas matplotlib torchvision tqdm
+   ```
+
+   The code assumes the following folder structure:
+```
+root/
+│
+├── train_and_validate.py       # This script
+├── tools/
+│   ├── Dataset.py              # Data loader for training and validation
+│   ├── dataProperties.py       # Utility to calculate mean and std
+│   ├── prepare_dataset.py      # Utility to read dataset information
+│   └── LeNet5_different_inputSizes.py  # LeNet5 model architecture
+└── Dataset_Prep/
+    └── data_preparation_results/
+        └── Cropped_slides/
+            └── source_name/
+                └── train/
+                    └── allpatches__level_4_size_128.txt
+                └── val/
+                    └── allpatches__level_4_size_128.txt
+```
+
+2. **Run the Script from the Command Line**
+
+   ```bash
+   python train_and_validate.py --train_dataset_dir ./Dataset_Prep/data_preparation_results/.../train.txt --val_dataset_dir ./Dataset_Prep/data_preparation_results/.../val.txt --batch_size 1024 --num_epochs 50
+   ```
+
+3. **Outputs**
+   
+1. **Trained Model**: Saved in `./results/source_name/L4_128/trained_models/`.
+2. **Training & Validation Logs**: Stored in CSV files inside the `train_test_summary/` folder.
+3. **Summary**: The best epoch and performance metrics are saved in `Train_Val_Dataset_summary.txt`.
+4. The model checkpoints and training/validation logs will be saved in the `results/` directory.
+Training/validation accuracy and loss are saved to CSV files:
+
+```python
+train_data.to_csv('./results/.../train_data.csv')
+torch.save(model.state_dict(), './results/.../trained_models/model.pth')
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 We will explain the following steps one-by-one:
 
 # Tissue Segmentation Tool using LeNet5
