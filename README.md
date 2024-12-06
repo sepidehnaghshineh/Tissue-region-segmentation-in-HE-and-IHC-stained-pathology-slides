@@ -189,6 +189,10 @@ train_data.to_csv('./results/.../train_data.csv')
 torch.save(model.state_dict(), './results/.../trained_models/model.pth')
 ```
 ---
+
+**To plot training loss and accuracy over the epochs:**
+
+---
 # Tissue Segmentation Tool using LeNet5 (Inference)
 
 This repository provides a tool for tissue segmentation in whole slide images (WSIs) using a deep learning model based on LeNet5. The tool processes WSIs, generates segmentation masks, and evaluates results using metrics like Jaccard Index and Dice Coefficient.
