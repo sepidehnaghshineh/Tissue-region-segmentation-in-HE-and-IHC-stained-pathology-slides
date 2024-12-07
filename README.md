@@ -190,12 +190,13 @@ torch.save(model.state_dict(), './results/.../trained_models/model.pth')
 ```
 ---
 
-**To:
-   -Plot training loss and accuracy over the epochs ,
-   -Plot the confusion matrix,
-   -Calculate the confidence intervals,
-   -Calculate the auc_val, f1_score_val, recall_score_val, precision_val,
-   -Save the wrongly Predicted patches:**
+**To:**
+- Plot training loss and accuracy over the epochs
+- Plot the confusion matrix
+- Calculate the confidence intervals
+- Calculate the `AUC`, `f1 score`, `recall score`, and `precision`
+- Save the wrongly predicted patches 
+
    
 ```bash
 python3 plotting_analysis.py --data_source <Your_Dataset_Name> --Level_patch <Your_Patch_Level> --model_type <Your_Model_Type> --num_epochs <Number_of_Epochs> --ext_data_source <External_Data_Source>
