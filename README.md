@@ -201,10 +201,10 @@ torch.save(model.state_dict(), './results/.../trained_models/model.pth')
 ```bash
 python3 plotting_analysis.py --data_source <Your_Dataset_Name> --Level_patch <Your_Patch_Level> --model_type <Your_Model_Type> --num_epochs <Number_of_Epochs> --ext_data_source <External_Data_Source>
 ```
-<img src="Images/Loss-accuracy.png" alt="Alt text" height="200" />
-<img src="Images/ROC.png" alt="Alt text" height="200" />
-<img src="Images/Confusion matrix.png" alt="Alt text" height="200" />
-<img src="Images/Confidence intervals.png" alt="Alt text" height="200" />
+<img src="Images/Loss-accuracy.png" alt="Alt text" height="300" />
+<img src="Images/ROC.png" alt="Alt text" height="300" />
+<img src="Images/Confusion matrix.png" alt="Alt text" height="300" />
+<img src="Images/Confidence intervals.png" alt="Alt text" height="300" />
 
 ---
 # Tissue Segmentation Tool using LeNet5 (Inference)
