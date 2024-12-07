@@ -241,9 +241,6 @@ Use the following command to execute the script:
 ```bash
 python <script_name>.py --input_dir <path_to_txt> --out_dir <output_directory> --resolution <resolution> --voting <voting_type> --data_source <source_name>
 ```
-
-Replace placeholders with appropriate values. See [Input Requirements](#input-requirements) for details.
-
 ---
 
 ## Input Requirements
