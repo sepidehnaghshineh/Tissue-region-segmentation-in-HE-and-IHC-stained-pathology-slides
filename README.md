@@ -190,7 +190,16 @@ torch.save(model.state_dict(), './results/.../trained_models/model.pth')
 ```
 ---
 
-**To plot training loss and accuracy over the epochs:**
+**To:
+   -Plot training loss and accuracy over the epochs ,
+   -Plot the confusion matrix,
+   -Calculate the confidence intervals,
+   -Calculate the auc_val, f1_score_val, recall_score_val, precision_val,
+   -Save the wrongly Predicted patches:**
+   
+```bash
+python3 plotting_analysis.py --data_source <Your_Dataset_Name> --Level_patch <Your_Patch_Level> --model_type <Your_Model_Type> --num_epochs <Number_of_Epochs> --ext_data_source <External_Data_Source>
+```
 
 ---
 # Tissue Segmentation Tool using LeNet5 (Inference)
