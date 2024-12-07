@@ -273,7 +273,10 @@ python predict.py --input_dir ./Segmentation/segmentation_results/wsi.txt --out_
 
 ## Citations
 
-If you use this code in your research, please cite the following sources:
+If you use this project in your research, please cite it as follows:
 
+```
+Naghshineh Kani, Sepideh; Soyak, Burak Can; Gokce, Melih; Duyar, Zeynep; Alicikus, Hasan; Yapıcıer, Özlem; Öner, Mustafa Ümit (2024). Tissue-region-segmentation-in-HE-and-IHC-stained-pathology-slides-of-specimens-from-different-origins (Version 1.0.0) [Computer software]. https://github.com/sepidehnaghshineh/Tissue-region-segmentation-in-HE-and-IHC-stained-pathology-slides. DOI: 10.5281/zenodo.1234
+```
 
 ---
