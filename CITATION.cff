@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Naghshineh Kani"
+  given-names: "Sepideh"
+  orcid: "https://orcid.org/0009-0001-5611-9946"
+- family-names: "Soyak"
+  given-names: "Burak Can"
+- family-names: "Gokce"
+  given-names: "Melih"
+- family-names: "Duyar"
+  given-names: "Zeynep"   
+- family-names: "Alicikus"
+  given-names: "Hasan"   
+- family-names: "yapıcıer"
+  given-names: "özlem"
+  orcid: "https://orcid.org/0000-0001-6977-8927"
+- family-names: "Oner"
+  given-names: "Mustafa Umit"
+  orcid: "https://orcid.org/0000-0003-4252-9167"
+title: "Tissue-region-segmentation-in-HE-and-IHC-stained-pathology-slides-of-specimens-from-different-origins"
+version: 1.0.0
+doi: 10.5281/zenodo.1234
+date-released: 2024-12-07
+url: "https://github.com/sepidehnaghshineh/Tissue-region-segmentation-in-HE-and-IHC-stained-pathology-slides"
