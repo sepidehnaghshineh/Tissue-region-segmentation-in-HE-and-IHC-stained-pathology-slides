@@ -1,4 +1,6 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14131968.svg)](https://doi.org/10.5281/zenodo.14131968)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14294426.svg)](https://doi.org/10.5281/zenodo.14294426)
+
 
 This repository is the official implementation of "TISSUE REGION SEGMENTATION IN H&E-STAINED AND IHC-STAINED PATHOLOGY SLIDES OF SPECIMENS FROM DIFFERENT ORIGINS".
 
